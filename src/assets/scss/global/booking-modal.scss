@@ -1,0 +1,110 @@
+$booking-color-green: rgba(0,200,0,1);
+
+.booking-modal {
+	z-index: 11;
+
+	&__card {
+		width: 30%;
+		height: fit-content;
+
+		&__place {
+			margin-bottom: 10px;
+			font-size: 16px;
+			line-height: 120%;
+
+			.title {
+				font-weight: 500;
+			}
+		}
+
+		&__price {
+			.value {
+				background: $booking-color-green;
+				border-radius: 5px;
+				padding: 5px;
+				color: white;
+				font-weight: bold;
+			}
+		}
+	}
+
+	&__form {
+		display: flex;
+		flex-direction: column;
+
+		input, textarea {
+			margin-bottom: 15px;
+			border: 1px solid black;
+		}
+
+		input, textarea, button {
+			font-size: 16px;
+			border-radius: 5px;
+			padding: 8px;
+		}
+
+		textarea {
+			resize: none;
+		}
+
+		button {
+			background: $booking-color-green;
+			height: 40px;
+			color: white;
+			font-weight: 600;
+		}
+	}
+
+	&__info {
+		display: flex;
+		margin-bottom: 20px;
+
+		&__left, &__right {
+			width: 100%;
+		}
+
+		&__right {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			.logo {
+				width: 120px;
+				height: 120px;
+				background: rgba(0,0,0,.3);
+				border-radius: 50%;
+				overflow: hidden;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				cursor: pointer;
+				position: relative;
+
+				.center {
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+
+					img {
+						width: 30px;
+					}
+				}
+
+				.image {
+					z-index: 1;
+					position: absolute;
+					top: 0;
+					left: 0;
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+					display: none;
+
+					&.chosen {
+						display: block;
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,1 @@
+export const API_URL = 'https://test-task-1.env.topcontent.com/api'

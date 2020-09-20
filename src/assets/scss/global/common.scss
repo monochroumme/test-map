@@ -1,0 +1,53 @@
+html, body {
+  overflow-x: hidden;
+}
+
+body, {
+  background: #EDEDED;
+  font-family: Roboto;
+  width: 100%;
+  height: 100%;
+}
+
+a {
+  text-decoration: none;
+  outline: none;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+input {
+  &::-ms-clear {
+    display: none;
+  }
+}
+
+input, textarea {
+  outline: none;
+}
+
+button {
+  cursor: pointer;
+  padding: 0;
+  background: none;
+  border: none;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
