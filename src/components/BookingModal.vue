@@ -96,7 +96,7 @@ export default {
 				return;
 			}
 
-			const booked = await this.bookPlace({
+			await this.bookPlace({
 			 	name: this.name,
         admin: this.admin,
         email: this.email,
@@ -104,14 +104,9 @@ export default {
         details: this.details,
         logo: this.logo,
         id: this.seat.id
-			});
-
-			if (booked === true) {
-				this.$toasted.success('Вы успешно забронировали место', {position: 'top-center'});
+			}).then(() => {
 				this.closeModal();
-			} else {
-				this.$toasted.error(booked, {position: 'top-center'});
-			}
+			}).catch(e => {});
 		}
 	}
 }

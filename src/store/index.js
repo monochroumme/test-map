@@ -43,22 +43,19 @@ export default new Vuex.Store({
 
     async bookPlace({commit}, data) {
       let formData = new FormData();
-      formData.append('name', data.name);
-      formData.append('admin', data.admin);
-      formData.append('email', data.email);
-      formData.append('phone', data.phone);
-      formData.append('details', data.details || "what");
-      formData.append('logo', data.logo);
 
-      let success = false;
-      await apiRequest.postFormData(`stands/${data.id}`, formData).then(() => {
-        success = true;
-      }).catch(e => {
-        console.error(e);
-        success = e.response.data.error;
+      Object.entries(data).filter(v => v[0] != 'id').forEach(entry => {
+        if (entry[0] != 'details')
+          formData.append(entry[0], entry[1]);
+        else formData.append(entry[0], entry[1] || 'what'); // back gives exception if details is empty
       });
 
-      return success;
+      await apiRequest.postFormData(`stands/${data.id}`, formData).then(() => {
+        Vue.prototype.$toasted.success('Вы успешно забронировали место', {position: 'top-center'});
+      }).catch(e => {
+        Vue.prototype.$toasted.error(e.response.data.error, {position: 'top-center'});
+        throw e;
+      });
     }
   }
 })

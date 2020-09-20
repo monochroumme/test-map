@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { API_URL } from '../config/types'
 
 function headers() {
   return {
@@ -11,11 +10,10 @@ function headers() {
   }
 }
 
-function headersAuth() {
+function headersFormData() {
   return {
     headers: {
       'Content-Type': 'multipart/form-data',
-      // 'Accept': 'multipart/form-data',
       'Authorization': `Bearer ${process.env.VUE_APP_AUTH_TOKEN}`
     }
   }
@@ -36,34 +34,14 @@ const handleError = (e) => {
 
 export default class apiRequest {
   static get(path) {
-    return request(axios.get(`${API_URL}/${path}`, headers()));
-  }
-
-  static getPublic(path) {
-    return request(axios.get(`${API_URL}/${path}`));
-  }
-
-  static post(path, data) {
-    return request(axios.post(`${API_URL}/${path}`, data, headers()));
-  }
-
-  static patch(path, data) {
-    return request(axios.patch(`${API_URL}/${path}`, data, headers()));
+    return request(axios.get(`${process.env.VUE_APP_API_URL}/${path}`, headers()));
   }
 
   static delete(path) {
-    return request(axios.delete(`${API_URL}/${path}`, headers()));
-  }
-
-  static put(path, data) {
-    return request(axios.put(`${API_URL}/${path}`, data));
+    return request(axios.delete(`${process.env.VUE_APP_API_URL}/${path}`, headers()));
   }
 
   static postFormData(path,data) {
-    return request(axios.post(`${API_URL}/${path}`, data, headersAuth()));
-  }
-
-  static putJson(path, data) {
-    return request(axios.put(`${API_URL}/${path}`, data, headers()));
+    return request(axios.post(`${process.env.VUE_APP_API_URL}/${path}`, data, headersFormData()));
   }
 }
