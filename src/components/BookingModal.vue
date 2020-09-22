@@ -30,7 +30,7 @@
 					<div class="custom-modal__info__right booking-modal__info__right">
 						<div class="logo" @click="chooseImg">
 							<div class="center" v-if="!logo">
-								<img src="../static/svg/camera.svg">
+								<img src="/svg/camera.svg">
 							</div>
 							<img :src="logoSrc" class="image" :class="{chosen: logo}">
 							<input v-show="false" type="file" accept="image" name="image" @change="uploadImage" ref="imageLoader">

@@ -17,16 +17,14 @@ Vue.use(LoadScript)
 Vue.use(VueCookie)
 Vue.use(require('vue-moment'))
 
-Vue.loadScript('https://unpkg.com/@google/markerclustererplus@5.1.0/dist/markerclustererplus.min.js').then(script => {
-	document.body.appendChild(script);
-	
-	Vue.loadScript(`https://maps.googleapis.com/maps/api/js?key=${process.env.VUE_APP_GOOGLE_MAPS_API_KEY}`).then(script => {
-		document.body.appendChild(script);
+Promise.all([
+	Vue.loadScript('https://unpkg.com/@google/markerclustererplus@5.1.0/dist/markerclustererplus.min.js'),
+	Vue.loadScript(`https://maps.googleapis.com/maps/api/js?key=${process.env.VUE_APP_GOOGLE_MAPS_API_KEY}`)
+]).then(() => {
+	new Vue({
+	  router,
+	  store,
+	  render: h => h(App)
+	}).$mount('#app')
+})
 
-		new Vue({
-		  router,
-		  store,
-		  render: h => h(App)
-		}).$mount('#app')
-	});
-});

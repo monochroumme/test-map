@@ -1,7 +1,7 @@
 <template>
 	<div class="custom-modal event-modal">
 		<transition name="fade" mode="out-in">
-			<BookingModal :seat="chosenSeat" :event="event" v-if="isBooking" @close-modal="closeBookingModal" @booked="onBooked" />
+			<booking-modal :seat="chosenSeat" :event="event" v-if="isBooking" @close-modal="closeBookingModal" @booked="onBooked" />
 		</transition>
 		<div class="custom-modal__bg" @click="closeModal"></div>
 		<div class="custom-modal__card event-modal__card">
@@ -41,7 +41,7 @@ export default {
 	props: ['fullEvents', 'currentEventId'],
 
 	components: {
-		BookingModal: () => import('./BookingModal')
+		BookingModal: () => import('@/components/BookingModal')
 	},
 
 	data() {
@@ -88,10 +88,8 @@ export default {
 					this.stands[i] = [];
 					for (let k = 0; k < this.seatsPerRow; k++) {
 						const curStand = this.fullEvent.stands.find(s => s.row_number-1 == i && s.seat_number-1 == k)
-						if (curStand) {
-							if (booked ? !booked.find(v => v == curStand.id) : true)
-								this.stands[i][k] = curStand;
-						}
+						if (curStand && (booked ? !booked.find(v => v == curStand.id) : true))
+							this.stands[i][k] = curStand;
 					}
 				}
 			}

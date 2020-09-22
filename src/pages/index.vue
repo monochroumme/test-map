@@ -13,7 +13,7 @@ import moment from 'moment'
 
 export default {
 	components: {
-		EventModal: () => import('../components/EventModal')
+		EventModal: () => import('@/components/EventModal')
 	},
 
 	data() {
