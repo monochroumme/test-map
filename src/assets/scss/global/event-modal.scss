@@ -1,9 +1,13 @@
 .event-modal {
+	overflow-x: auto;
+	overflow-y: auto;
+
 	&__booking {
 		width: 100%;
 		display: flex;
 		align-items: center;
 		margin: auto;
+		padding-bottom: 30px;
 
 		&__content {
 			margin: auto;
@@ -45,5 +49,25 @@
 				cursor: not-allowed;
 			}
 		}
+	}
+
+	&__card {
+		min-width: 650px;
+	}
+
+	&__remove-cookies {
+		padding: 10px 20px;
+		font-size: 16px;
+		font-weight: 700;
+		line-height: 100%;
+		background: #FF1050;
+		border-radius: 5px;
+		color: white;
+	}
+}
+
+@media (max-width: 650px) {
+	.event-modal {
+		justify-content: flex-start;
 	}
 }

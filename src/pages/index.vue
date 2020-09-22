@@ -2,7 +2,7 @@
   <div class="index-page">
     <div class="map"></div>
     <transition name="fade" mode="out-in">
-    	<event-modal v-if="isEventModalOpen" @close-modal="onEventModalClose" :fullEvents="fullEvents" :currentEventId="currentEventId" />
+    	<event-modal v-if="isEventModalOpen" @close-modal="onEventModalClose" @delete-bookings="unbookEvents" :fullEvents="fullEvents" :currentEventId="currentEventId" />
     </transition>
   </div>
 </template>

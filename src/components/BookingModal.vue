@@ -5,8 +5,8 @@
 			<button class="custom-modal__card__close" @click="closeModal"></button>
 			<div class="custom-modal__card__content">
 				<h2 class="custom-modal__card__title">Бронирование места в {{ event.title }}</h2>
-				<div class="booking-modal__info">
-					<div class="booking-modal__info__left">
+				<div class="custom-modal__info">
+				 	<div class="custom-modal__info__left" booking-modal__info__right>
 						<p class="custom-modal__card__desc">{{ seat.details }}</p>
 						<div class="booking-modal__card__place">
 							<div class="booking-modal__card__place__row">
@@ -27,7 +27,7 @@
 							<span class="value">{{ seat.price }}₽</span>
 						</div>
 					</div>
-					<div class="booking-modal__info__right">
+					<div class="custom-modal__info__right booking-modal__info__right">
 						<div class="logo" @click="chooseImg">
 							<div class="center" v-if="!logo">
 								<img src="../static/svg/camera.svg">
@@ -105,7 +105,12 @@ export default {
         logo: this.logo,
         id: this.seat.id
 			}).then(() => {
-				this.closeModal();
+				let booked = this.$cookie.get('booked');
+				if (!booked) booked = [];
+				else if (typeof booked == 'string') booked = booked.split(',');
+				booked.push(this.seat.id);
+				this.$cookie.set('booked', booked, { expires: '3M' });
+				this.$emit('booked', this.seat.row_number, this.seat.seat_number);
 			}).catch(e => {});
 		}
 	}
